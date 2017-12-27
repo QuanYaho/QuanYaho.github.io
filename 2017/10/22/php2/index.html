@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="QuanYanHua's blog."><meta name="keywords" content="quanyanhua,全燕华，全燕华的博客"><title>php基础 | 全燕华</title><link rel="stylesheet" type="text/css" href="//fonts.css.network/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.1"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.1"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">php基础</h1><a id="logo" href="/.">全燕华</a><p class="description">QuanYanHua's blog</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="Arama"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">php基础</h1><div class="post-meta"><a href="/2017/10/22/php2/#comments" class="comment-count"></a><p><span class="date">Oct 22, 2017</span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>点击</i></i></span></p></div><div class="post-content"><h4 id="GET对象"><a href="#GET对象" class="headerlink" title="$_GET对象"></a>$_GET对象</h4><p>$_GET获取通过get方法提交的数据，参数在地址栏中可见<br></p>
+<p>html</p>
+<pre><code>&lt;form action=&quot;01.php&quot; method=&quot;get&quot; &gt;
+      &lt;label for=&quot;&quot;&gt;姓名:
+              &lt;input type=&quot;text&quot; name= &quot;userName&quot;&gt;
+    &lt;/label&gt;
+
+      &lt;label for=&quot;&quot;&gt;邮箱:
+              &lt;input type=&quot;text&quot; name= &quot;userEmail&quot;&gt;
+    &lt;/label&gt;
+
+         &lt;input type=&quot;submit&quot; name=&quot;&quot;&gt;
+&lt;/form&gt;
+</code></pre><p>php</p>
+<pre><code>&lt;?php 
+    echo &apos;userName:&apos;.$_GET[&apos;userName&apos;];
+
+    echo &apos;userEmail:&apos;.$_GET[&apos;userEmail&apos;];
+ ?&gt;
+</code></pre><blockquote>
+<p>$_GET[‘name属性的值’]</p>
+</blockquote>
+<h4 id="POST对象"><a href="#POST对象" class="headerlink" title="$_POST对象"></a>$_POST对象</h4><p>$_POST获取通过post方法提交的数据<br><br>参考上面的 将代码中的method改为post</p>
+<h4 id="POST-amp-GET错误处理"><a href="#POST-amp-GET错误处理" class="headerlink" title="POST&amp;GET错误处理"></a>POST&amp;GET错误处理</h4><blockquote>
+<p>当我们直接访问POST&amp;GET页面时由于并没有传递任何数据,会因为<code>$_GET</code>或<code>$_POST</code>不存在对应的key而报错.</p>
+</blockquote>
+<ul>
+<li><p>处理方式1:<br><br>使用array_key_exists(key, 数组)函数来进行判断<br><br>参数1: 要检测的key字符串<br><br>参数2: 检验的数组<br></p>
+<pre><code>if(array_key_exists(&apos;name&apos;, $_GET)){
+    //如果有数据 再去读取
+}else{
+    // 反之 可以执行一些 其他的逻辑
+}
+</code></pre></li>
+</ul>
+<h4 id="FILES对象"><a href="#FILES对象" class="headerlink" title="$_FILES对象"></a>$_FILES对象</h4><ul>
+<li><p><b>文件上传处理</b></p>
+<pre><code>&lt;form action=&quot;03.fileUpdate.php&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+          &lt;label for=&quot;&quot;&gt;照片:
+              &lt;input type=&quot;file&quot; name = &quot;picture&quot; multiple=&quot;&quot;&gt;
+    &lt;/label&gt;
+
+          &lt;input type=&quot;submit&quot; name=&quot;&quot;&gt;
+  &lt;/form&gt;
+</code></pre><p>php</p>
+<pre><code>&lt;?php  
+  sleep(5);// 让服务器休息一会
+  print_r($_FILES);
+?&gt;
+</code></pre></li>
+</ul>
+<p><b>现象:</b></p>
+<blockquote>
+<p>点击提交后,服务器没有立即出现反应,而是休息了一会sleep(5)<br><br>在wamp/tmp目录下面出现了一个.tmp文件。<br>.tmp文件一会就被自动删除了<br><br>服务器返回的内容中,有文件的名字<code>[name] =&gt; computer.png</code>,<br>以及上传文件保存的位置<code>D:\wamp\tmp\php3D70.tmp</code></p>
+</blockquote>
+<p>【注意】<br>&gt;<br>在html表单中需要设置enctype=”multipart/form-data”<br><br>只能post方式 PHP接收文件可以通过$_FILES来获取</p>
+<ul>
+<li><p><b>如何将临时目录下面的文件保存起来</b></p>
+</li>
+<li><p><b> $_FILE 获取上传的文件</b></p>
+<pre><code>&lt;form action=&apos;xx.php&apos; method=&apos;post&apos; enctype=&apos;multipart/form-data&apos;&gt;
+    &lt;input type=&apos;file&apos; name=&apos;icon&apos;&gt;
+    &lt;input type=&apos;submit&apos;&gt;
+&lt;/form&gt;
+</code></pre></li>
+</ul>
+<p>【注意】</p>
+<blockquote>
+<p>form表单中要使用post提交数据，以及要在form表单中添加<code>enctype=multipart/form-data</code>属性</p>
+</blockquote>
+<pre><code>&lt;?php
+// 可以打印 $_FILES的所有信息
+print_r($_FILES);
+?&gt;
+</code></pre><h4 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h4><p> <code>_FILES</code>用法跟<code>$_GET</code>,<code>$_POST</code>类似,都是关系型数组</p>
+<ul>
+<li><code>_FILE[&#39;key&#39;]</code>:可以获取对应上传的文件,这里的key跟提交时的name相对应</li>
+<li><code>_FILE[&#39;key&#39;][&#39;name&#39;]</code> 可以获取上传的文件名</li>
+<li><code>_FILE[&#39;key&#39;][&#39;tmp_name&#39;]</code>可以获取上传的文件</li>
+</ul>
+<h4 id="move-uploaded-file-函数"><a href="#move-uploaded-file-函数" class="headerlink" title="move_uploaded_file()函数"></a><code>move_uploaded_file()</code>函数</h4><pre><code>Array ( [picture] =&gt; Array ( 
+        [name] =&gt; computer.png 
+        [type] =&gt; image/png 
+        [tmp_name] =&gt; D:\wamp\tmp\php8913.tmp 
+        [error] =&gt; 0 [size] =&gt; 5212 ) 
+    )
+
+
+&lt;?php  
+    sleep(5);// 让服务器休息一会,方便我们查看上传的临时文件
+    // 第一个参数是 规定要移动的文件
+    // 第二个参数是 规定文件的新位置
+    move_uploaded_file($_FILES[&apos;picture&apos;][&apos;tmp_name&apos;], &apos;./upload/&apos;.$_FILES[&apos;picture&apos;][&apos;name&apos;]);
+ ?&gt;
+</code></pre><p>通过picture(根据表单标签的name属性决定)获取临时文件名以及上传文件名</p>
+<h4 id="move-uploaded-file-移动文件"><a href="#move-uploaded-file-移动文件" class="headerlink" title="move_uploaded_file(移动文件)"></a><code>move_uploaded_file</code>(移动文件)</h4><p>上传的临时文件,一会就会被自动删除,我们需要将其移动到保存的位置</p>
+<pre><code>move_uploaded_file($_FILES[&apos;photo&apos;][&apos;tmp_name&apos;], &apos;./images/test.jpg&apos;);
+</code></pre><ul>
+<li>参数1:移动的文件</li>
+<li>参数2:目标路径</li>
+</ul>
+</div><div class="tags"><a href="/tags/php/">php</a></div><div class="post-share"><div class="bdsharebuttonbox"><span style="float:left;line-height: 28px;height: 28px;font-size:16px;font-weight:blod">分享到：</span><a href="#" data-cmd="more" class="bds_more"></a><a href="#" data-cmd="mshare" title="分享到一键分享" class="bds_mshare"></a><a href="#" data-cmd="fbook" title="分享到Facebook" class="bds_fbook"></a><a href="#" data-cmd="twi" title="分享到Twitter" class="bds_twi"></a><a href="#" data-cmd="linkedin" title="分享到linkedin" class="bds_linkedin"></a><a href="#" data-cmd="youdao" title="分享到有道云笔记" class="bds_youdao"></a><a href="#" data-cmd="evernotecn" title="分享到印象笔记" class="bds_evernotecn"></a><a href="#" data-cmd="weixin" title="分享到微信" class="bds_weixin"></a><a href="#" data-cmd="qzone" title="分享到QQ空间" class="bds_qzone"></a><a href="#" data-cmd="tsina" title="分享到新浪微博" class="bds_tsina"></a></div></div><div class="post-nav"><a href="/2017/10/23/http1/" class="pre">网络传输协议（请求报文和响应报文）</a><a href="/2017/10/20/ajax_01(php)/" class="next">php基础</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#GET对象"><span class="toc-text">$_GET对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#POST对象"><span class="toc-text">$_POST对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#POST-amp-GET错误处理"><span class="toc-text">POST&GET错误处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FILES对象"><span class="toc-text">$_FILES对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#小结："><span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#move-uploaded-file-函数"><span class="toc-text">move_uploaded_file()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#move-uploaded-file-移动文件"><span class="toc-text">move_uploaded_file(移动文件)</span></a></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Ajax_02/">动画属性：Animation</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/http1/">网络传输协议（请求报文和响应报文）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/22/php2/">php基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/20/ajax_01(php)/">php基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/js-Array-sort/">数组.sort()方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/01/apply-and-call/">apply和call的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/20/css3-transition /">过渡属性：transition</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/表单对齐/">表单对齐</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/01/about-hexo-01/">使用hexo（01）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/03/css-margin/">css:与外边距margin相关</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/css3/" style="font-size: 15px;">css3</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/php/" style="font-size: 15px;">php</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/http协议/" style="font-size: 15px;">http协议</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="https://github.com/QuanYaho" title="我的GitHub" target="_blank">我的GitHub</a><ul></ul><a href="http://www.quanyanhua.pw/" title="我的个人网站" target="_blank">我的个人网站</a><ul></ul><a href="http://www.w3school.com.cn/" title="w3school" target="_blank">w3school</a><ul></ul><a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000" title="廖雪峰的Javascript教程" target="_blank">廖雪峰的Javascript教程</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">Baidu Site Haritası</a> |  <a href="/atom.xml">订阅</a> |  <a href="/about/">关于</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次</p><p><span> Copyright &copy;<a href="/." rel="nofollow">quanyanhua.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.1"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.1" async></script><script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","qzone","linkedin","fbook","twi","print","renren","sqq","evernotecn","bdysc","tqq","tqf","bdxc","kaixin001","tieba","douban","bdhome","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","h163","copy"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"]}};with(document)0[(getElementsByTagName('head')[0]||head).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script></body></html>
