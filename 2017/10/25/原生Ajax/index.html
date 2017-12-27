@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="QuanYanHua's blog."><meta name="keywords" content="quanyanhua,全燕华，全燕华的博客"><title>原生Ajax | 全燕华</title><link rel="stylesheet" type="text/css" href="//fonts.css.network/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.1"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.1"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">原生Ajax</h1><a id="logo" href="/.">全燕华</a><p class="description">QuanYanHua's blog</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="Arama"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">原生Ajax</h1><div class="post-meta"><a href="/2017/10/25/原生Ajax/#comments" class="comment-count"></a><p><span class="date">Oct 25, 2017</span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>点击</i></i></span></p></div><div class="post-content"><h3 id="Ajax五步使用法"><a href="#Ajax五步使用法" class="headerlink" title="Ajax五步使用法:"></a>Ajax五步使用法:</h3><blockquote>
+<ol>
+<li><p><b>建立XMLHTTPRequest对象</b></p>
+</li>
+<li><p><b>注册回调函数</b><br> 当服务器回应我们了,我们想要执行什么逻辑</p>
+</li>
+<li><p><b>使用open方法设置和服务器端交互的基本信息</b></p>
+</li>
+<li><p><b>设置提交的网址,数据,post提交的一些额外内容</b><br> 设置发送的数据，开始和服务器端交互</p>
+</li>
+<li><p><b>发送数据,更新界面</b><br>  在注册的回调函数中,获取返回的数据,更新界面</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="XMLHttpRequest-API讲解"><a href="#XMLHttpRequest-API讲解" class="headerlink" title="XMLHttpRequest_API讲解"></a>XMLHttpRequest_API讲解</h3><h5 id="1-创建XMLHttpRequest对象-兼容性写法"><a href="#1-创建XMLHttpRequest对象-兼容性写法" class="headerlink" title="1.创建XMLHttpRequest对象(兼容性写法)"></a>1.创建XMLHttpRequest对象(兼容性写法)</h5><ul>
+<li><p>新版本浏览器:</p>
+<pre><code>var xml=new XMLHttpRequest();
+</code></pre></li>
+<li><p>IE5 和 IE6</p>
+<pre><code>var xml=new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+</code></pre></li>
+<li><p>考虑兼容性创建Ajax对象</p>
+<pre><code>var request ;
+
+if(XMLHttpRequest){
+
+   // 新式浏览器写法
+
+   request = new XMLHttpRequest();
+
+}else{
+
+   //IE5,IE6写法
+
+   new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+
+}
+</code></pre><h5 id="2-发送请求"><a href="#2-发送请求" class="headerlink" title="2.发送请求:"></a>2.发送请求:</h5></li>
+</ul>
+<pre><code>open(method,url,async)     //规定请求的类型、URL 以及是否异步处理请求。
+</code></pre><blockquote>
+<p><b>method：</b>请求的类型;GET 或 POST</p>
+<p><b>url：</b>文件在服务器上的位置</p>
+<p><b>async：</b>true（异步）或 false（同步）</p>
+</blockquote>
+<pre><code>send(string)    //将请求发送到服务器。
+</code></pre><blockquote>
+<p>string：仅用于 POST 请求</p>
+</blockquote>
+<h5 id="3-POST请求注意点"><a href="#3-POST请求注意点" class="headerlink" title="3.POST请求注意点:"></a>3.POST请求注意点:</h5><blockquote>
+<p>如果想要像form表单提交数据那样使用POST请求,需要使用XMLHttpRequest对象的setRequestHeader()方法 来添加 HTTP 头。然后在 send() 方法中添加想要发送的数据：</p>
+</blockquote>
+<pre><code>xmlhttp.open(&quot;POST&quot;,&quot;ajax_test.php&quot;,true);
+
+xmlhttp.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);
+
+xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);
+</code></pre><h5 id="4-onreadystatechange事件"><a href="#4-onreadystatechange事件" class="headerlink" title="4.onreadystatechange事件"></a>4.onreadystatechange事件</h5><ul>
+<li><p><b>onreadystatechange属性    </b></p>
+<blockquote>
+<p>存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数。</p>
+</blockquote>
+</li>
+<li><p><b>readyState属性</b>    </p>
+<blockquote>
+<p>存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。</p>
+<p>0: 请求未初始化</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>1: 服务器连接已建立</p>
+<p>2: 请求已接收</p>
+<p>3: 请求处理中</p>
+<p>4: 请求已完成，且响应已就绪</p>
+</blockquote>
+<ul>
+<li><b>status属性    </b></li>
+</ul>
+<blockquote>
+<p>200: “OK”</p>
+<p>404: 未找到页面</p>
+</blockquote>
+<h5 id="4-服务器响应内容"><a href="#4-服务器响应内容" class="headerlink" title="4.服务器响应内容"></a>4.服务器响应内容</h5><p>如果响应的是普通字符串,使用responseText,如果响应的是XML,使用responseXML</p>
+<ul>
+<li><p>responseText属性    </p>
+<blockquote>
+<p>获得字符串形式的响应数据。</p>
+</blockquote>
+</li>
+<li><p>responseXML属性    </p>
+<blockquote>
+<p>获得 XML 形式的响应数据。</p>
+</blockquote>
+</li>
+</ul>
+</div><div class="tags"><a href="/tags/Ajax/">Ajax</a></div><div class="post-share"><div class="bdsharebuttonbox"><span style="float:left;line-height: 28px;height: 28px;font-size:16px;font-weight:blod">分享到：</span><a href="#" data-cmd="more" class="bds_more"></a><a href="#" data-cmd="mshare" title="分享到一键分享" class="bds_mshare"></a><a href="#" data-cmd="fbook" title="分享到Facebook" class="bds_fbook"></a><a href="#" data-cmd="twi" title="分享到Twitter" class="bds_twi"></a><a href="#" data-cmd="linkedin" title="分享到linkedin" class="bds_linkedin"></a><a href="#" data-cmd="youdao" title="分享到有道云笔记" class="bds_youdao"></a><a href="#" data-cmd="evernotecn" title="分享到印象笔记" class="bds_evernotecn"></a><a href="#" data-cmd="weixin" title="分享到微信" class="bds_weixin"></a><a href="#" data-cmd="qzone" title="分享到QQ空间" class="bds_qzone"></a><a href="#" data-cmd="tsina" title="分享到新浪微博" class="bds_tsina"></a></div></div><div class="post-nav"><a href="/2017/10/23/http协议/" class="next">网络传输协议（请求报文和响应报文）</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ajax五步使用法"><span class="toc-text">Ajax五步使用法:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XMLHttpRequest-API讲解"><span class="toc-text">XMLHttpRequest_API讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-创建XMLHttpRequest对象-兼容性写法"><span class="toc-text">1.创建XMLHttpRequest对象(兼容性写法)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-发送请求"><span class="toc-text">2.发送请求:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-POST请求注意点"><span class="toc-text">3.POST请求注意点:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-onreadystatechange事件"><span class="toc-text">4.onreadystatechange事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-服务器响应内容"><span class="toc-text">4.服务器响应内容</span></a></li></ol></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/原生Ajax/">原生Ajax</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/http协议/">网络传输协议（请求报文和响应报文）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/22/php基础2-获取对象/">php基础2-获取对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/20/php基础1/">php基础1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/数组的sort方法/">数组.sort()方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/01/Function的apply和call方法/">Function的apply和call方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/20/过渡属性transition /">过渡属性：transition</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/表单对齐/">表单对齐</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/01/hexo常用命令/">hexo常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/03/css的margin属性/">css的margin属性</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/http协议/" style="font-size: 15px;">http协议</a> <a href="/tags/php/" style="font-size: 15px;">php</a> <a href="/tags/Ajax/" style="font-size: 15px;">Ajax</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/css3/" style="font-size: 15px;">css3</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="https://github.com/QuanYaho" title="我的GitHub" target="_blank">我的GitHub</a><ul></ul><a href="http://www.quanyanhua.pw/" title="我的个人网站" target="_blank">我的个人网站</a><ul></ul><a href="http://www.w3school.com.cn/" title="w3school" target="_blank">w3school</a><ul></ul><a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000" title="廖雪峰的Javascript教程" target="_blank">廖雪峰的Javascript教程</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">Baidu Site Haritası</a> |  <a href="/atom.xml">订阅</a> |  <a href="/about/">关于</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次</p><p><span> Copyright &copy;<a href="/." rel="nofollow">quanyanhua.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.1"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.1" async></script><script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","qzone","linkedin","fbook","twi","print","renren","sqq","evernotecn","bdysc","tqq","tqf","bdxc","kaixin001","tieba","douban","bdhome","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","h163","copy"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"]}};with(document)0[(getElementsByTagName('head')[0]||head).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script></body></html>
