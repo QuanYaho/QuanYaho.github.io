@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="QuanYanHua's blog."><meta name="keywords" content="quanyanhua,全燕华，全燕华的博客"><title>2D/3D 转换属性（Transform） | 全燕华</title><link rel="stylesheet" type="text/css" href="//fonts.css.network/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.1"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.1"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">2D/3D 转换属性（Transform）</h1><a id="logo" href="/.">全燕华</a><p class="description">QuanYanHua's blog</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="Arama"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">2D/3D 转换属性（Transform）</h1><div class="post-meta"><a href="/2017/09/20/CSS3-2D3D 转换属性Transform/#comments" class="comment-count"></a><p><span class="date">Sep 20, 2017</span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>点击</i></i></span></p></div><div class="post-content"><h3 id="transform属性-向元素应用-2D-或-3D-转换。"><a href="#transform属性-向元素应用-2D-或-3D-转换。" class="headerlink" title="transform属性    向元素应用 2D 或 3D 转换。"></a>transform属性    向元素应用 2D 或 3D 转换。</h3><blockquote>
+<p><code>transform</code>属性允许我们对元素进行旋转、缩放、移动或倾斜。</p>
+</blockquote>
+<pre><code>div
+{
+transform:rotate(7deg);
+-ms-transform:rotate(7deg);     /* IE 9 */
+-moz-transform:rotate(7deg);     /* Firefox */
+-webkit-transform:rotate(7deg); /* Safari 和 Chrome */
+-o-transform:rotate(7deg);     /* Opera */
+}
+</code></pre><ul>
+<li><p>取值：<br></p>
+<ul>
+<li><p><code>none</code>    定义不进行转换。</p>
+</li>
+<li><p><code>matrix(n,n,n,n,n,n)</code>    定义 2D 转换，使用六个值的矩阵。</p>
+</li>
+<li><p><b><code>translate(x,y)</code>    定义 2D 转换。    </b></p>
+<pre><code>#MyDIV
+{
+transform:translate(10px);
+}
+</code></pre><p>  <b><code>translate3d(x,y,z)</code>    定义 3D 转换。</b>    </p>
+<p>  <code>translateX(x)</code>    定义转换，只是用 X 轴的值。（元素在X轴平移）<br><br>  <code>translateY(y)</code>    定义转换，只是用 Y 轴的值。（元素在y轴平移）</p>
+<pre><code>#MyDIV
+{
+transform:translateY(10px);
+}
+</code></pre><p>  <code>translateZ(z)</code>    定义 3D 转换，只是用 Z 轴的值。</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>- &lt;b&gt;`scale(x,y)`    定义 2D 缩放转换。&lt;/b&gt;    
+
+        #MyDIV
+        {
+        transform:scale(1.1,1.1);
+        }
+
+    &lt;b&gt;`scale3d(x,y,z)`    定义 3D 缩放转换。&lt;/b&gt;
+
+
+    `scaleX(x)`    通过设置 X 轴的值来定义缩放转换。
+
+        #MyDIV
+        {
+        transform:scaleX(0.5);
+        }
+
+
+    `scaleY(y)`    通过设置 Y 轴的值来定义缩放转换。&lt;br&gt;    
+    `scaleZ(z)`    通过设置 Z 轴的值来定义 3D 缩放转换。&lt;br&gt;
+
+- &lt;b&gt;`rotate(angle)`    定义 2D 旋转，在参数中规定角度。&lt;/b&gt;
+
+        #MyDIV
+        {
+        transform:rotate(45deg);
+        }
+
+
+
+    &lt;b&gt;`rotate3d(x,y,z,angle)`    定义 3D 旋转。&lt;/b&gt;&lt;br&gt;    
+    rotateX(angle)    定义沿着 X 轴的 3D 旋转。&lt;br&gt;
+    rotateY(angle)    定义沿着 Y 轴的 3D 旋转。    &lt;br&gt;
+    rotateZ(angle)    定义沿着 Z 轴的 3D 旋转。    
+
+
+    &lt;b&gt;`skew(x-angle,y-angle)`定义沿着 X 和 Y 轴的 2D 倾斜转换。&lt;/b&gt;    &lt;br&gt;
+    skewX(angle)    定义沿着 X 轴的 2D 倾斜转换。    &lt;br&gt;
+    skewY(angle)    定义沿着 Y 轴的 2D 倾斜转换。&lt;br&gt;    
+- &lt;b&gt;`perspective(n)`    为 3D 转换元素定义透视视图。&lt;/b&gt;
+</code></pre><h3 id="transform-origin-允许你改变被转换元素的位置。"><a href="#transform-origin-允许你改变被转换元素的位置。" class="headerlink" title="transform-origin    允许你改变被转换元素的位置。"></a>transform-origin    允许你改变被转换元素的位置。</h3><p>例子：设置旋转元素的基点位置：</p>
+<pre><code>div
+{
+transform: rotate(45deg);
+transform-origin:20% 40%;
+}
+</code></pre><blockquote>
+<p>注释：该属性必须与 transform 属性一同使用。</p>
+</blockquote>
+<ul>
+<li><p>语法<br>  <code>transform-origin: x-axis y-axis z-axis;</code></p>
+<ul>
+<li>默认值：    50% 50% 0</li>
+</ul>
+</li>
+</ul>
+<pre><code> - `x-axis`：定义视图被置于 X 轴的何处
+
+    可能的值：
+    - left
+    - center
+    - right
+    - length
+    - %
+
+- `y-axis`：定义视图被置于 Y 轴的何处
+    - top
+    - center
+    - bottom
+    - length
+    - %
+
+
+- `z-axis`：定义视图被置于 Z 轴的何处
+    - length
+</code></pre><h3 id="transform-style-属性规定如何在-3D-空间中呈现被嵌套的元素。"><a href="#transform-style-属性规定如何在-3D-空间中呈现被嵌套的元素。" class="headerlink" title="transform-style    属性规定如何在 3D 空间中呈现被嵌套的元素。"></a>transform-style    属性规定如何在 3D 空间中呈现被嵌套的元素。</h3><p>例子：使被转换的子元素保留其 3D 转换：</p>
+<pre><code>div
+{
+transform: rotateY(60deg);
+transform-style: preserve-3d;
+}
+</code></pre><blockquote>
+<p>注释：该属性必须与 transform 属性一同使用。</p>
+</blockquote>
+<ul>
+<li><p>语法<br><code>transform-style: flat|preserve-3d;</code></p>
+<ul>
+<li><code>flat</code>    子元素将不保留其 3D 位置。</li>
+<li><code>preserve-3d</code>    子元素将保留其 3D 位置。</li>
+</ul>
+</li>
+</ul>
+<h3 id="perspective-规定-3D-元素的透视效果。"><a href="#perspective-规定-3D-元素的透视效果。" class="headerlink" title="perspective    规定 3D 元素的透视效果。"></a>perspective    规定 3D 元素的透视效果。</h3><p>例子：设置元素被查看位置的视图：</p>
+<pre><code>div
+{
+perspective: 500;  // 元素距离视图的距离，以像素计
+-webkit-perspective: 500; /* Safari 和 Chrome */
+}
+</code></pre><blockquote>
+<p>目前浏览器都不支持 perspective 属性。<br><br>Chrome 和 Safari 支持替代的 -webkit-perspective 属性。</p>
+</blockquote>
+<ul>
+<li><p>定义和用法</p>
+<blockquote>
+<p>perspective 属性定义 3D 元素距视图的距离，以像素计。<br><br>  该属性允许您改变 3D 元素查看 3D 元素的视图。</p>
+</blockquote>
+<p>  当为元素定义 perspective 属性时，其子元素会获得透视效果，而不是元素本身。</p>
+</li>
+</ul>
+<p>注释：perspective 属性只影响 3D 转换元素。</p>
+<h3 id="perspective-origin-规定-3D-元素的底部位置。"><a href="#perspective-origin-规定-3D-元素的底部位置。" class="headerlink" title="perspective-origin    规定 3D 元素的底部位置。"></a>perspective-origin    规定 3D 元素的底部位置。</h3><h3 id="backface-visibility-定义元素在不面对屏幕时是否可见。"><a href="#backface-visibility-定义元素在不面对屏幕时是否可见。" class="headerlink" title="backface-visibility    定义元素在不面对屏幕时是否可见。"></a>backface-visibility    定义元素在不面对屏幕时是否可见。</h3><h4 id="JavaScript-语法："><a href="#JavaScript-语法：" class="headerlink" title="JavaScript 语法："></a>JavaScript 语法：</h4><pre><code>object.style.transform=&quot;rotate(7deg)&quot;
+object.style.transformStyle=&quot;preserve-3d&quot;
+</code></pre></div><div class="tags"><a href="/tags/css3/">css3</a></div><div class="post-share"><div class="bdsharebuttonbox"><span style="float:left;line-height: 28px;height: 28px;font-size:16px;font-weight:blod">分享到：</span><a href="#" data-cmd="more" class="bds_more"></a><a href="#" data-cmd="mshare" title="分享到一键分享" class="bds_mshare"></a><a href="#" data-cmd="fbook" title="分享到Facebook" class="bds_fbook"></a><a href="#" data-cmd="twi" title="分享到Twitter" class="bds_twi"></a><a href="#" data-cmd="linkedin" title="分享到linkedin" class="bds_linkedin"></a><a href="#" data-cmd="youdao" title="分享到有道云笔记" class="bds_youdao"></a><a href="#" data-cmd="evernotecn" title="分享到印象笔记" class="bds_evernotecn"></a><a href="#" data-cmd="weixin" title="分享到微信" class="bds_weixin"></a><a href="#" data-cmd="qzone" title="分享到QQ空间" class="bds_qzone"></a><a href="#" data-cmd="tsina" title="分享到新浪微博" class="bds_tsina"></a></div></div><div class="post-nav"><a href="/2017/09/21/CSS3-动画属性2-animation/" class="pre">动画属性2-animation</a><a href="/2017/09/20/CSS3-过渡属性transition /" class="next">过渡属性：transition</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#transform属性-向元素应用-2D-或-3D-转换。"><span class="toc-text">transform属性    向元素应用 2D 或 3D 转换。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#transform-origin-允许你改变被转换元素的位置。"><span class="toc-text">transform-origin    允许你改变被转换元素的位置。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#transform-style-属性规定如何在-3D-空间中呈现被嵌套的元素。"><span class="toc-text">transform-style    属性规定如何在 3D 空间中呈现被嵌套的元素。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#perspective-规定-3D-元素的透视效果。"><span class="toc-text">perspective    规定 3D 元素的透视效果。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#perspective-origin-规定-3D-元素的底部位置。"><span class="toc-text">perspective-origin    规定 3D 元素的底部位置。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#backface-visibility-定义元素在不面对屏幕时是否可见。"><span class="toc-text">backface-visibility    定义元素在不面对屏幕时是否可见。</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JavaScript-语法："><span class="toc-text">JavaScript 语法：</span></a></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/原生Ajax/">原生Ajax</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/23/http协议/">网络传输协议（请求报文和响应报文）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/22/php基础2-获取对象/">php基础2-获取对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/20/php基础1/">php基础1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/数组的sort方法/">数组.sort()方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/01/Function的apply和call方法/">Function的apply和call方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/21/CSS3-动画属性1-@keyframes/">动画属性1-@keyframes</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/21/CSS3-动画属性3-animation/">动画属性3-animation</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/21/CSS3-动画属性2-animation/">动画属性2-animation</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/20/CSS3-2D3D 转换属性Transform/">2D/3D 转换属性（Transform）</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/css3/" style="font-size: 15px;">css3</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/php/" style="font-size: 15px;">php</a> <a href="/tags/Ajax/" style="font-size: 15px;">Ajax</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/http协议/" style="font-size: 15px;">http协议</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="https://github.com/QuanYaho" title="我的GitHub" target="_blank">我的GitHub</a><ul></ul><a href="http://www.quanyanhua.pw/" title="我的个人网站" target="_blank">我的个人网站</a><ul></ul><a href="http://www.w3school.com.cn/" title="w3school" target="_blank">w3school</a><ul></ul><a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000" title="廖雪峰的Javascript教程" target="_blank">廖雪峰的Javascript教程</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">Baidu Site Haritası</a> |  <a href="/atom.xml">订阅</a> |  <a href="/about/">关于</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次</p><p><span> Copyright &copy;<a href="/." rel="nofollow">quanyanhua.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.1"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.1" async></script><script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","qzone","linkedin","fbook","twi","print","renren","sqq","evernotecn","bdysc","tqq","tqf","bdxc","kaixin001","tieba","douban","bdhome","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","h163","copy"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"]}};with(document)0[(getElementsByTagName('head')[0]||head).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script></body></html>
